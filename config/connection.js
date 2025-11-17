@@ -7,8 +7,17 @@ if (process.env.DB_PASSWORD === "ChangeMe!") {
   process.exit(1);
 }
 
-const sequelize = process.env.JAWSDB_URL
-  ? new Sequelize(process.env.JAWSDB_URL)
+const sequelize = process.env.DATABASE_URL
+  ? new Sequelize(process.env.DATABASE_URL,{
+     dialect: 'postgres',
+      dialectOptions: {
+        ssl: {
+          require: true,
+          rejectUnauthorized: false
+        }
+      },
+    })
+    
   : new Sequelize(
       process.env.DB_DATABASE,
       process.env.DB_USERNAME,
