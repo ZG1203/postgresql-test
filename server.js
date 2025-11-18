@@ -25,7 +25,7 @@ app.get("/", (req, res) => {
 });
 
 // Add routes
-app.use(routes);
+app.use('/api',routes);
 
 // Sync database
 sequelize.sync({ force: rebuild }).then(() => {
